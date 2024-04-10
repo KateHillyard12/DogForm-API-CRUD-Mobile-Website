@@ -15,17 +15,17 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="uploadStylesheet.css" />
   </head>
 
   <body>
     <div id="custom-cursor">
-      <!-- Your custom cursor image goes here -->
-      <img src="BlackPawPrint.webp" alt="Custom Cursor" />
+      <img src="WhitePawPrint.png" alt="Custom Cursor" />
     </div>
 
     <h1>Dog Form Data</h1>
 
+    
     <div id="border"></div>
     <div class="container">
       <div class="row">
@@ -92,7 +92,7 @@
               <div id="energy-error" class="col-12 text-danger">&nbsp;</div>
             </div>
 
-            <label for="size" class="slide-in">How big is your puppy?</label>
+            <label for="size" class="slide-in">How big is your puppy? (in text or in lbs)</label>
             <input type="text" id="size" class="slide-in" />
             <div class="row mb-3">
               <div id="size-error" class="col-12 text-danger">&nbsp;</div>
@@ -106,7 +106,7 @@
         </div>
       </div>
     </div>
-    <hr />
+    <hr/>
 
     <div class="table-container">
       <table id="dog_breeds" class="overflow">
@@ -131,7 +131,7 @@
         function handleClick(event) {
             // Create a new image element for the paw print
             var pawPrint = document.createElement("img");
-            pawPrint.src = "BlackPawPrint.webp";
+            pawPrint.src = "WhitePawPrint.png";
             pawPrint.classList.add("paw-print");
 
             // Calculate the position of the paw print relative to the viewport
