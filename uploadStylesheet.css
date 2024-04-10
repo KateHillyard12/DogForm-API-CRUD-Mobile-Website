@@ -177,5 +177,29 @@ button:hover {
 
 
 
+  @keyframes moveRight {
+    0% { left: -10%; } /* Start position off the left side of the viewport */
+    100% { left: calc(100% - 10%); } /* End position to stop at 80% of the viewport width */
+}
 
+.image {
+    margin-top:60px;
+    position: relative;
+    top: 50%;
+    left: -10%; /* Initial position off the left side of the viewport */
+    transform: translateY(-50%);
+    width: 10%; /* Set the width of the image relative to the viewport width */
+    height: auto; /* Let the height adjust automatically to maintain aspect ratio */
+    animation: moveRight 10s linear infinite; /* Adjust animation duration and timing function as needed */
+    z-index: 2; /* Push the image in front of other elements */
+}
+
+@media (max-width: 768px) {
+    .image {
+        width: 20%; /* Adjust image width for smaller screens */
+        animation: moveRight 5s linear infinite; /* Adjust animation for smaller screens */
+        animation-duration: 10s; /* Example: Adjust animation duration for smaller screens */
+        animation-iteration-count: infinite; /* Example: Make animation loop infinitely on smaller screens */
+    }
+}
 
