@@ -15,12 +15,12 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="Styling/stylesheets/stylesheet.css" />
   </head>
 
   <body>
     <div id="custom-cursor">
-      <img src="BrownPawPrint.png" alt="Custom Cursor" />
+      <img src="Styling/images/BrownPawPrint.png" alt="Custom Cursor" />
     </div>
 
     <h1>Dog Form Data</h1>
@@ -34,7 +34,7 @@
               >What breed type are you looking for?</label
             >
             <select id="breed" class="slide-in" >
-              <option value="none"></option>
+              <option value=""></option>
               <option value="toy">Toy</option>
               <option value="work">Work</option>
               <option value="herd">Herd</option>
@@ -46,7 +46,7 @@
 
             <label for="fur" class="slide-in">What fur type best suites your needs?</label>
             <select id="fur" class="slide-in">
-              <option value="none"></option>
+              <option value=""></option>
               <option value="smooth">Smooth</option>
               <option value="rough">Rough</option>
               <option value="cord">Corded</option>
@@ -71,7 +71,7 @@
 
             <label for="energy" class="slide-in" >What energy level fits your lifestyle?</label>
             <select id="energy" class="slide-in">
-              <option value="none"></option>
+              <option value=""></option>
               <option value="low">Low</option>
               <option value="med">Medium</option>
               <option value="high">High</option>
@@ -210,7 +210,7 @@
     </div>
 
     <hr/>
-    <img src="Scout_RUNNING.gif" alt="Moving Image" class="image">
+    <img src="Styling/images/Scout_RUNNING.gif" alt="Moving Image" class="image">
     <hr/>
 
     <div class="table-container">
@@ -236,7 +236,7 @@
         function handleClick(event) {
             // Create a new image element for the paw print
             var pawPrint = document.createElement("img");
-            pawPrint.src = "BrownPawPrint.png";
+            pawPrint.src = "Styling/images/BrownPawPrint.png";
             pawPrint.classList.add("paw-print");
 
             // Calculate the position of the paw print relative to the viewport

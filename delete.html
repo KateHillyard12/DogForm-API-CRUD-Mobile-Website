@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIMM 285 Form</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="Styling/stylesheets/deleteStylesheet.css" />
+  </head>
+
+<body>
+    <div id="custom-cursor"> 
+        <img src="Styling/images/DarkBrownPawPrint.png" alt="Custom Cursor" />
+    </div>
+  
+    <h1>Dog Form Data</h1>
+  
+    <div id="border"></div>
+
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+                <h2>Delete this Dog:</h2>
+          </div>
+        </div>   
+
+        <div class="row">
+            <div class="col-md-12">
+                <button id="submit">DELETE</button>
+            </div>
+        </div> 
+    </div>
+
+        <script>
+
+        //Javascript to handle animations and css
+      // JavaScript to trigger the animation
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".slide-in").forEach(function (element) {
+          element.classList.add("active");
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        var cursor = document.getElementById("custom-cursor");
+
+        // Show the cursor when the page is loaded
+        cursor.style.display = "block";
+
+        //handles the click event
+        function handleClick(event) {
+          // Create a new image element for the paw print
+          var pawPrint = document.createElement("img");
+          pawPrint.src = "Styling/images/DarkBrownPawPrint.png";
+          pawPrint.classList.add("paw-print");
+
+          // Calculate the position of the paw print relative to the viewport
+          var pawPrintSize = 40; // Assuming the size of the cursor image is 40x40 pixels
+          var pawPrintX = event.clientX - pawPrintSize / 2;
+          var pawPrintY = event.clientY - pawPrintSize / 2 + window.pageYOffset; // Add scroll offset
+
+          // Set the position of the paw print
+          pawPrint.style.position = "absolute";
+          pawPrint.style.left = pawPrintX + "px";
+          pawPrint.style.top = pawPrintY + "px";
+
+          // Set the size of the paw print
+          pawPrint.style.width = pawPrintSize + "px";
+          pawPrint.style.height = pawPrintSize + "px";
+
+          // Append the paw print to the body
+          document.body.appendChild(pawPrint);
+        }
+
+        // Add click event listener to the document
+        document.addEventListener("click", handleClick);
+
+        // Update cursor position on scroll
+        window.addEventListener("scroll", function () {
+          var x = event.clientX;
+          var y = event.clientY + window.pageYOffset;
+          cursor.style.left = x + "px";
+          cursor.style.top = y + "px";
+        });
+
+        document.addEventListener("mousemove", function (event) {
+          var x = event.clientX;
+          var y = event.clientY;
+          cursor.style.left = x + "px";
+          cursor.style.top = y + "px";
+        });
+
+        // Update cursor position on scroll
+        window.addEventListener("scroll", function () {
+          var x = event.clientX;
+          var y = event.clientY + window.pageYOffset;
+          cursor.style.left = x + "px";
+          cursor.style.top = y + "px";
+        });
+      });
+
+
+            let form = document.querySelector('form');
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                let urlParams = new URLSearchParams(window.location.search);
+                let id = urlParams.get('dog_breeds');
+                let data = {
+                    id: id,
+
+                };
+
+                fetch(`http://localhost:80/delete`, {
+                    method: 'put',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(response => response.json().then(json => ({ status: response.status, json })))
+                    .then(({ status, json }) => {
+                        if (status === 200) {
+                            console.log('Success:', json);
+                            window.location.href = 'index.html';  // Redirect to 'index.html'
+                        }
+                        else if (status === 400) {
+                            console.log('Validation error:', json.errors);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+
+            });
+        </script>
+    </body>
+</html>
