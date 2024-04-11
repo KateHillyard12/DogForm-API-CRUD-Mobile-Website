@@ -192,7 +192,7 @@ button:hover {
 
 @media (max-width: 768px) {
     .image {
-        width: 20%; /* Adjust image width for smaller screens */
+        width: 10%; /* Adjust image width for smaller screens */
         animation: moveRight 5s linear infinite; /* Adjust animation for smaller screens */
         animation-duration: 10s; /* Example: Adjust animation duration for smaller screens */
         animation-iteration-count: infinite; /* Example: Make animation loop infinitely on smaller screens */
