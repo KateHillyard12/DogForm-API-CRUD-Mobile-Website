@@ -198,3 +198,108 @@ button:hover {
         animation-iteration-count: infinite; /* Example: Make animation loop infinitely on smaller screens */
     }
 }
+
+
+.nav {
+    position: fixed;
+    top: 50%; /* Adjust as needed */
+    transform: translateY(-140%);
+    left: 0;
+    z-index: 999; /* Ensure it's on top of other content */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    height: 90px; /* Default height */
+    width: 100px; /* Default width */
+    background-color: #ffffff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        width: 65px; /* Adjust width for smaller screens */
+        height: auto; /* Allow height to adjust automatically */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}
+
+
+:root {
+    --grey-color: #211e1a;
+    --primary-color: #8c583e; /* Define your primary, info, success, warning, and danger colors here */
+    --info-color: #8c583e;
+  }
+  
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .menu-hover-fill li {
+    position: relative;
+  }
+  
+  .menu-hover-fill li::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: -1rem;
+    width: 0.25rem;
+    height: 100%;
+    background: var(--menu-link-active-color);
+    transition: 0.6s;
+  }
+  
+  .menu-hover-fill li a {
+    --menu-link-color: var(--grey-color);
+    position: relative;
+    background: linear-gradient(var(--menu-link-active-color) 0 100%) left / 0 no-repeat;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    transition: background-size 0.45s 0.04s;
+  }
+  
+  .menu-hover-fill li a::before {
+    position: absolute;
+    content: attr(data-text);
+    z-index: -1;
+    color: var(--menu-link-color);
+  }
+  
+  :root {
+    --menu-link-active-colors: var(--primary-color), var(--info-color), var(--success-color), var(--warning-color), var(--danger-color);
+  }
+  
+  .menu-hover-fill li:nth-child(1) {
+    --menu-link-active-color: var(--primary-color);
+  }
+  
+  .menu-hover-fill li:nth-child(2) {
+    --menu-link-active-color: var(--info-color);
+  }
+  
+  .menu-hover-fill li:nth-child(3) {
+    --menu-link-active-color: var(--success-color);
+  }
+  
+  .menu-hover-fill li:nth-child(4) {
+    --menu-link-active-color: var(--warning-color);
+  }
+  
+  .menu-hover-fill li:nth-child(5) {
+    --menu-link-active-color: var(--danger-color);
+  }
+  
+  .menu-hover-fill li:hover::before {
+    left: calc(100% + 1rem);
+  }
+  
+  .menu-hover-fill li:hover a {
+    background-size: 100%;
+  }
+  

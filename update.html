@@ -15,12 +15,16 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" type="text/css" href="Styling/stylesheets/updateStylesheet.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="Styling/stylesheets/updateStylesheet.css"
+    />
   </head>
 
   <body>
     <div id="custom-cursor">
-      <img src="Styling/images/DarkGreenPawPrint.png" alt="Custom Cursor" />
+      <img src="Styling/images/WhitePawPrint.png" alt="Custom Cursor" />
     </div>
 
     <h1>Dog Form Data</h1>
@@ -35,72 +39,87 @@
         <div class="col-md-12">
           <h2>ADD IN A DOG OF YOUR OWN:</h2>
           <form id="DogForm">
-            <label for="name" class="slide-in"
-              >What is the name of your dog?</label
-            >
-            <input type="text" id="name" class="slide-in" />
-            <div class="row mb-3">
-              <div id="name-error" class="col-12 text-danger">&nbsp;</div>
+            <div class="row">
+              <div class="col-md-12">
+                <label for="name" class="slide-in"
+                  >What is the name of your dog?</label
+                >
+                <input type="text" id="name" class="slide-in" />
+                <div class="row mb-3">
+                  <div id="name-error" class="col-6 text-danger">&nbsp;</div>
+                </div>
+              </div>
             </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="breed" class="slide-in"
+                  >What breed is your dog?</label
+                >
+                <select id="breed" class="slide-in">
+                  <option value=""></option>
+                  <option value="toy">Tiny Toy</option>
+                  <option value="work">Hard Worker</option>
+                  <option value="herd">Herder</option>
+                  <option value="sport">Speedy Sporty</option>
+                </select>
+                <div class="row mb-3">
+                  <div id="breed-error" class="col-6 text-danger">&nbsp;</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="fur" class="slide-in"
+                  >What fur type does your dog have?</label
+                >
+                <select id="fur" class="slide-in">
+                  <option value=""></option>
+                  <option value="smooth">Smooth and Soft</option>
+                  <option value="rough">Rough and Glossy</option>
+                  <option value="cord">Corded and Bouncy</option>
+                  <option value="doub">Extra Heavy coat</option>
+                  <option value="silk">Silky and Shinny</option>
+                  <option value="curl">Curly and Wavy</option>
+                  <option value="wire">Wirey and Rugged</option>
+                  <option value="hless">Hairless and Clean</option>
+                </select>
 
-            <label for="breed" class="slide-in">What breed is your dog?</label>
-            <select id="breed" class="slide-in">
-              <option value=""></option>
-              <option value="toy">Tiny Toy</option>
-              <option value="work">Hard Worker</option>
-              <option value="herd">Herder</option>
-              <option value="sport">Speedy Sporty</option>
-            </select>
-            <div class="row mb-3">
-              <div id="breed-error" class="col-12 text-danger">&nbsp;</div>
+                <div class="row mb-3">
+                  <div id="fur-error" class="col-12 text-danger">&nbsp;</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="color" class="slide-in"
+                  >What color is your puppy?</label
+                >
+                <input type="text" id="color" class="slide-in" />
+                <div class="row mb-3">
+                  <div id="color-error" class="col-12 text-danger">&nbsp;</div>
+                </div>
+              </div>
             </div>
-
-            <label for="fur" class="slide-in"
-              >What fur type does your dog have?</label
-            >
-            <select id="fur" class="slide-in">
-              <option value=""></option>
-              <option value="smooth">Smooth and Soft</option>
-              <option value="rough">Rough and Glossy</option>
-              <option value="cord">Corded and Bouncy</option>
-              <option value="doub">Extra Heavy coat</option>
-              <option value="silk">Silky and Shinny</option>
-              <option value="curl">Curly and Wavy</option>
-              <option value="wire">Wirey and Rugged</option>
-              <option value="hless">Hairless and Clean</option>
-            </select>
-
-            <div class="row mb-3">
-              <div id="fur-error" class="col-12 text-danger">&nbsp;</div>
-            </div>
-
-            <label for="color" class="slide-in"
-              >What color is your puppy?</label
-            >
-            <input type="text" id="color" class="slide-in" />
-            <div class="row mb-3">
-              <div id="color-error" class="col-12 text-danger">&nbsp;</div>
-            </div>
-
-            <label for="energy" class="slide-in"
-              >How energized is your dog?</label
-            >
-            <select id="energy" class="slide-in">
-              <option value=""></option>
-              <option value="low">Chill</option>
-              <option value="med">Excited</option>
-              <option value="high">Zoomies x100</option>
-            </select>
-            <div class="row mb-3">
-              <div id="energy-error" class="col-12 text-danger">&nbsp;</div>
-            </div>
-
-            <label for="size" class="slide-in"
-              >How big is your puppy? (in text or in lbs)</label
-            >
-            <input type="text" id="size" class="slide-in" />
-            <div class="row mb-3">
-              <div id="size-error" class="col-12 text-danger">&nbsp;</div>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="energy" class="slide-in"
+                  >How energized is your dog?</label
+                >
+                <select id="energy" class="slide-in">
+                  <option value=""></option>
+                  <option value="low">Chill</option>
+                  <option value="med">Excited</option>
+                  <option value="high">Zoomies x100</option>
+                </select>
+                <div class="row mb-3">
+                  <div id="energy-error" class="col-12 text-danger">&nbsp;</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="size" class="slide-in"
+                  >How big is your puppy? (in text or in lbs)</label
+                >
+                <input type="text" id="size" class="slide-in" />
+                <div class="row mb-3">
+                  <div id="size-error" class="col-12 text-danger">&nbsp;</div>
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -113,8 +132,6 @@
     </div>
 
     <hr />
-    <img src="Styling/images/Scout_RUNNING.gif" alt="Moving Image" class="image" />
-    <hr />
     <div class="table-container">
       <table id="dog_breeds" class="overflow">
         Dog Form goes here.
@@ -122,8 +139,7 @@
     </div>
 
     <script>
-
-    //Javascript to handle animations and css
+      //Javascript to handle animations and css
       // JavaScript to trigger the animation
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".slide-in").forEach(function (element) {
@@ -140,7 +156,7 @@
         function handleClick(event) {
           // Create a new image element for the paw print
           var pawPrint = document.createElement("img");
-          pawPrint.src = "Styling/images/DarkGreenPawPrint.png";
+          pawPrint.src = "Styling/images/WhitePawPrint.png";
           pawPrint.classList.add("paw-print");
 
           // Calculate the position of the paw print relative to the viewport
@@ -188,9 +204,7 @@
         });
       });
 
-
-
-        // JavaScript to handle the form submission
+      // JavaScript to handle the form submission
 
       const errorBanner = document.getElementById("invalid-form");
       const successBanner = document.getElementById("success-form");
@@ -224,7 +238,7 @@
           body: formData,
         };
 
-        fetch("http://localhost/UPDATE", fetchSettings)
+        fetch("http://localhost/INSERT", fetchSettings)
           .then((response) => {
             return new Promise((resolve) =>
               response.json().then((json) =>
