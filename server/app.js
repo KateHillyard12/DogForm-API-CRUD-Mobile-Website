@@ -166,7 +166,7 @@ app.post(
 
   (request, response) => {
     const insertSql = `INSERT INTO dog_breeds (name, breed, fur, color, energy, size) 
-                          VALUES (?, ?, ?, ?, ?, ?)`
+                          VALUES (?, ?, ?, ?, ?, ?)`;
     let queryParams = [
       request.body.name,
       request.body.breed,
@@ -176,7 +176,10 @@ app.post(
       parseInt(request.body.size)
     ];
 
-    const errors = validationResult(request)
+    console.log("Request body:", request.body);
+
+
+    const errors = validationResult(request);
     goodFormValues.push({ ...request.body });
 
     connection.query(insertSql, queryParams, (error, result) => {
@@ -197,7 +200,7 @@ app.post(
           .setHeader("Access-Control-Allow-Origin", "*") //Prevent CORS error
           .json({
             message: "Form submission was succesful!",
-            goodFormValues: goodFormValues
+            goodFormValues: goodFormValues,
           });
       }
     });
@@ -254,10 +257,10 @@ app.post(
       request.body.fur,
       request.body.color,
       request.body.energy,
-      parseInt(request.body.size)
+      parseInt(request.body.size),
     ];
 
-    const errors = validationResult(request)
+    const errors = validationResult(request);
     goodFormValues.push({ ...request.body });
 
     connection.query(updateSql, queryParams, (error, result) => {
@@ -278,13 +281,39 @@ app.post(
           .setHeader("Access-Control-Allow-Origin", "*") //Prevent CORS error
           .json({
             message: "Form submission was succesful!",
-            goodFormValues: goodFormValues
+            goodFormValues: goodFormValues,
           });
       }
     });
   }
 );
 
+//delete
+app.put("/DELETE", upload.none(), (request, response) => {
+  const errors = validationResult(request);
+  if (!errors.isEmpty()) {
+    return response.status(400).json({ errors: errors.array() });
+  }
+  let data = request.body;
+
+  let deleteSql = `DELETE FROM dog_breeds WHERE id = ?`;
+  let values = [data.id];
+
+  connections.query(deleteSql, values, (error, result) => {
+    if (error) {
+      console.log(error);
+      return response
+        .status(500)
+        .setHeader("Access-Control-Allow-Origin", "*")
+        .json({ message: "Something went wrong with the server." });
+    } else {
+      response
+        .setHeader("Access-Control-Allow-Origin", "*")
+        .json({ data: result });
+    }
+  });
+});
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Application app listening at http://localhost:${port}`);
 });
