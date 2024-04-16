@@ -3,6 +3,7 @@ const express = require("express");
 const { request } = require("http");
 const multer = require("multer");
 const mysql = require("mysql2");
+const dogs = require("./model/dogs");
 const { check, checkSchema, validationResult } = require("express-validator");
 
 // Setup defaults for script
@@ -55,6 +56,9 @@ INNER JOIN dog_stats ON dog_breeds.id = dog_stats.id`;
   let whereStatements = [];
   let queryParams = [];
   let orderByStatements = [];
+
+
+
 
   // Filtering based on form inputs
   console.log(request.body);
@@ -120,15 +124,17 @@ INNER JOIN dog_stats ON dog_breeds.id = dog_stats.id`;
     } else {
       // Default response object
       response
-         // Prevent CORS error
+        // Prevent CORS error
         .json({ data: result });
     }
   });
 });
 
-//Insert Javascript here
+
+
+//Insert 
 app.post(
-  "/INSERT",
+  "/dogs/",
   upload.none(),
   //name validation
   check("name", "You gotta have a name for your puppo.").isLength({ min: 3 }),
@@ -164,51 +170,25 @@ app.post(
   //size validation
   check("size", "How big or small is the dawg?").isInt({ min: 1, max: 300 }),
 
-  (request, response) => {
-    const insertSql = `INSERT INTO dog_breeds (name, breed, fur, color, energy, size) 
-                          VALUES (?, ?, ?, ?, ?, ?)`
-    let queryParams = [
-      request.body.name,
-      request.body.breed,
-      request.body.fur,
-      request.body.color,
-      request.body.energy,
-      parseInt(request.body.size)
-    ];
+  async (request, response) => {
+    //let errors = validationResult(request);
+    //if (!errors.isEmpty()) {...}
+    try {
+      await dogs.insert(request.body);
+    } catch (error) {
+      console.log(error);
+      return response
+        .status(500)
+        .json({ message: "Something went wrong with the server." });
+    }
 
-    console.log("Request body:", request.body);
-
-
-    const errors = validationResult(request);
-    goodFormValues.push({ ...request.body });
-
-    connection.query(insertSql, queryParams, (error, result) => {
-      if (error) {
-        console.log(error);
-        return response
-          .status(450) //Error code when something goes wrong with the server
-           //Prevent CORS error
-
-          .json({
-            message: "Something went wrong with the server.",
-            errors: errors.array(),
-          });
-      } else {
-        //Default response object
-        response
-          .status(250)
-           //Prevent CORS error
-          .json({
-            message: "Form submission was succesful!",
-            goodFormValues: goodFormValues,
-          });
-      }
-    });
+    response.json({ message: "Form submission was succesful!" });
   }
 );
 
-//update
 
+
+//update
 app.post(
   "/UPDATE",
   upload.none(),
@@ -266,19 +246,21 @@ app.post(
     connection.query(updateSql, queryParams, (error, result) => {
       if (error) {
         console.log(error);
-        return response
-          .status(450) //Error code when something goes wrong with the server
-           //Prevent CORS error
+        return (
+          response
+            .status(450) //Error code when something goes wrong with the server
+            //Prevent CORS error
 
-          .json({
-            message: "Something went wrong with the server.",
-            errors: errors.array(),
-          });
+            .json({
+              message: "Something went wrong with the server.",
+              errors: errors.array(),
+            })
+        );
       } else {
         //Default response object
         response
           .status(250)
-           //Prevent CORS error
+          //Prevent CORS error
           .json({
             message: "Form submission was succesful!",
             goodFormValues: goodFormValues,
@@ -287,6 +269,9 @@ app.post(
     });
   }
 );
+
+
+
 
 //delete
 app.put("/DELETE", upload.none(), (request, response) => {
@@ -304,12 +289,10 @@ app.put("/DELETE", upload.none(), (request, response) => {
       console.log(error);
       return response
         .status(500)
-        
+
         .json({ message: "Something went wrong with the server." });
     } else {
-      response
-        
-        .json({ data: result });
+      response.json({ data: result });
     }
   });
 });
