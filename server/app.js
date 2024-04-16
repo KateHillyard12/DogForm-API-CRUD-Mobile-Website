@@ -7,6 +7,7 @@ const { check, checkSchema, validationResult } = require("express-validator");
 
 // Setup defaults for script
 const app = express();
+app.use(express.static("public"));
 const upload = multer();
 const port = 80; // Default port to HTTP server
 const connection = mysql.createConnection({
@@ -18,7 +19,7 @@ const connection = mysql.createConnection({
 });
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res;
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
@@ -115,12 +116,11 @@ INNER JOIN dog_stats ON dog_breeds.id = dog_stats.id`;
       console.log(error);
       return response
         .status(500) // Error code when something goes wrong with the server
-        .setHeader("Access-Control-Allow-Origin", "*") // Prevent CORS error
         .json({ message: "Something went wrong with the server." });
     } else {
       // Default response object
       response
-        .setHeader("Access-Control-Allow-Origin", "*") // Prevent CORS error
+         // Prevent CORS error
         .json({ data: result });
     }
   });
@@ -166,7 +166,7 @@ app.post(
 
   (request, response) => {
     const insertSql = `INSERT INTO dog_breeds (name, breed, fur, color, energy, size) 
-                          VALUES (?, ?, ?, ?, ?, ?)`;
+                          VALUES (?, ?, ?, ?, ?, ?)`
     let queryParams = [
       request.body.name,
       request.body.breed,
@@ -187,7 +187,7 @@ app.post(
         console.log(error);
         return response
           .status(450) //Error code when something goes wrong with the server
-          .setHeader("Access-Control-Allow-Origin", "*") //Prevent CORS error
+           //Prevent CORS error
 
           .json({
             message: "Something went wrong with the server.",
@@ -197,7 +197,7 @@ app.post(
         //Default response object
         response
           .status(250)
-          .setHeader("Access-Control-Allow-Origin", "*") //Prevent CORS error
+           //Prevent CORS error
           .json({
             message: "Form submission was succesful!",
             goodFormValues: goodFormValues,
@@ -268,7 +268,7 @@ app.post(
         console.log(error);
         return response
           .status(450) //Error code when something goes wrong with the server
-          .setHeader("Access-Control-Allow-Origin", "*") //Prevent CORS error
+           //Prevent CORS error
 
           .json({
             message: "Something went wrong with the server.",
@@ -278,7 +278,7 @@ app.post(
         //Default response object
         response
           .status(250)
-          .setHeader("Access-Control-Allow-Origin", "*") //Prevent CORS error
+           //Prevent CORS error
           .json({
             message: "Form submission was succesful!",
             goodFormValues: goodFormValues,
@@ -304,11 +304,11 @@ app.put("/DELETE", upload.none(), (request, response) => {
       console.log(error);
       return response
         .status(500)
-        .setHeader("Access-Control-Allow-Origin", "*")
+        
         .json({ message: "Something went wrong with the server." });
     } else {
       response
-        .setHeader("Access-Control-Allow-Origin", "*")
+        
         .json({ data: result });
     }
   });
