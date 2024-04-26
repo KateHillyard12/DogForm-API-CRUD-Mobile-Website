@@ -210,7 +210,7 @@
           let dogData = json.data[0];
           document.getElementById('name').value = dogData.name;
           document.getElementById('breed').value = dogData.breed;
-          document.getElementById('fur').value = dogData.fur;
+          document.getElementById('fur').value = dogData.fur_type_id;
           document.getElementById('color').value = dogData.color;
           document.getElementById('energy').value = dogData.energy;
           document.getElementById('size').value = dogData.size;
@@ -227,8 +227,9 @@
 
 
 
-    document.getElementById("submit").addEventListener("click", (event) => {
-      const formData = new FormData();
+    document.getElementById('submit').addEventListener('click', (event) => {
+            const formData = new FormData();
+            console.log('updateData clicked');
 
       if (document.getElementById("name").value.length !== 0) {
         formData.append("name", document.getElementById("name").value);
@@ -249,7 +250,9 @@
         formData.append("size", document.getElementById("size").value);
       }
 
-      formData.append('dogId', DogId);
+      // formData.append('dogId', DogId);
+
+      console.log(formData);
 
       let fetchSettings = {
         method: 'PUT',

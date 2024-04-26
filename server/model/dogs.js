@@ -76,13 +76,9 @@ async function getAll( parameters = {}) {
     selectSql = selectSql + " ORDER BY " + orderByStatements.join(", ");
   }
 
-  if (
-    typeof parameters.limit !== "undefined" &&
-    parameters.limit > 0 &&
-    parameters.limit <= 100 // Ensure limit is within a reasonable range
-  ) {
-    selectSql += " LIMIT ?";
-    queryParams.push(parseInt(parameters.limit)); // Push the limit value to queryParams
+    //Dynamically add LIMIT expressions to SELECT statements if needed
+    if (typeof parameters.limit !== 'undefined' && parameters.limit > 0 && parameters.limit < 100) {
+      selectSql = selectSql + ' LIMIT ' + parameters.limit;
   }
 
   console.log(parameters);
