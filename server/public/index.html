@@ -48,14 +48,14 @@
           <label for="fur" class="slide-in">What fur type best suites your needs?</label>
           <select id="fur" class="slide-in">
             <option value=""></option>
-            <option value="smooth">Smooth</option>
-            <option value="rough">Rough</option>
-            <option value="cord">Corded</option>
-            <option value="doub">Double</option>
-            <option value="silk">Silky</option>
-            <option value="curl">Curly/Wavy</option>
-            <option value="wire">Wire</option>
-            <option value="hless">Hairless</option>
+            <option value="1">Smooth</option>
+            <option value="2">Rough</option>
+            <option value="3">Corded</option>
+            <option value="4">Double</option>
+            <option value="5">Silky</option>
+            <option value="6">Curly/Wavy</option>
+            <option value="7">Wire</option>
+            <option value="8">Hairless</option>
           </select>
 
           <div class="row mb-3">
@@ -342,13 +342,7 @@
               '<th width="10%">Fur</th>' +
               '<th width="10%">Color</th>' +
               '<th width="10%">Energy</th>' +
-              '<th width="5%">Size</th>' +
-              '<th width="5%">Shed</th>' +
-              '<th width="8%">Good w/Dogs</th>' +
-              '<th width="8%">Good w/Children</th>' +
-              '<th width="5%">Drool</th>' +
-              '<th width="5%">Bark</th>' +
-              '<th width="5%">Trainability</th>' +
+              '<th width="10%">Size</th>' +
               '<th width=5%></th>' +
               '<th width=5%></th>' +
               "</tr>" +
@@ -365,7 +359,7 @@
                   row.breed +
                   "</td>" +
                   "<td>" +
-                  row.fur +
+                  row.type +
                   "</td>" +
                   "<td>" +
                   row.color +
@@ -377,24 +371,6 @@
                   row.size +
                   "</td>" +
                   "<td>" +
-                  row.shedding_level +
-                  "</td>" +
-                  "<td>" +
-                  row.dog_kindness +
-                  "</td>" +
-                  "<td>" +
-                  row.child_kindness +
-                  "</td>" +
-                  "<td>" +
-                  row.drool_level +
-                  "</td>" +
-                  "<td>" +
-                  row.bark_level +
-                  "</td>" +
-                  "<td>" +
-                  row.train_level +
-                  "</td>" +
-                  "</td>" +
                   '<td><a href="update.html?id=' + row.dogId + '"> Update </a></td>' +
                   '<td><a href="delete.html?id=' + row.dogId + '"> Delete </a></td>' +
                   '</tr>';

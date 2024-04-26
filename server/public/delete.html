@@ -35,6 +35,17 @@
       </div>
     </div>
   </div>
+<!-- 
+  <div class='row mb-3'>
+    <div class='col-md-12'>
+        <div id='you_sure' class='col-12 text-danger'></div>
+    </div>
+</div> -->
+
+
+  <div id="invalid-form" class="alert alert-danger">&nbsp;</div>
+
+  <div id="success-form" class="alert alert-success">&nbsp;</div>
 
   <script>
 
@@ -106,8 +117,7 @@
 
 
 
-
-
+    const successForm = document.getElementById('success-form');
     const invalidForm = document.getElementById('invalid-form');
 
     successForm.style.display = 'none';
@@ -131,8 +141,8 @@
                 if (200 === status) {
                     console.log(json);
                     let dogData = json.data[0]; // Access the first object in the array
-                    document.getElementById('you_sure').innerHTML = "Are you sure you want to delete " + dogData.name + "?";
-                    //console.log(dogData);
+                    // document.getElementById('you_sure').innerHTML = "Are you sure you want to delete " + dogData.name + "?";
+                    console.log(dogData);
                 }
             })
             .catch(error => {

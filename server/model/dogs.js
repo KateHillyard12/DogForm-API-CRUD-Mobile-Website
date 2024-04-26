@@ -7,27 +7,23 @@ async function get(id) {
   console.log(getSql);
   console.log(queryParams);
 
-  return await connection.query(insertSql, queryParams);
+  let result = await connection.query(getSql, queryParams);
+
+  return result;
 
 }
 
-async function getAll(parameters = {}) {
+async function getAll( parameters = {}) {
   let selectSql = `SELECT 
-     dog_breeds.id AS dogId,
-     dog_breeds.name, 
-     dog_breeds.breed, 
-     dog_breeds.fur, 
-     dog_breeds.color, 
-     dog_breeds.energy, 
-     dog_breeds.size,
-     dog_stats.shedding_level,
-     dog_stats.dog_kindness,
-     dog_stats.child_kindness,
-     dog_stats.drool_level,
-     dog_stats.bark_level,
-     dog_stats.train_level
-   FROM dog_breeds
-   INNER JOIN dog_stats ON dog_breeds.id = dog_stats.id`;
+     db.id AS dogId,
+     db.name, 
+     db.breed, 
+     ft.type,
+     db.color, 
+     db.energy, 
+     db.size
+   FROM dog_breeds AS db
+   INNER JOIN fur_type AS ft ON db.fur_type_id = ft.id`;
 
   let whereStatements = [];
   let queryParams = [];
@@ -35,39 +31,39 @@ async function getAll(parameters = {}) {
 
 
   //Filtering based on form inputs
-  console.log(request.body);
+  console.log(parameters);
 
   if (
-    typeof request.body.breed !== "undefined" &&
-    request.body.breed !== "none"
+    typeof parameters.breed !== "undefined" &&
+    parameters.breed !== "none"
   ) {
-    whereStatements.push(`breed = ?`);
-    queryParams.push(request.body.breed);
+    whereStatements.push(`db.breed = ?`);
+    queryParams.push(parameters.breed);
   }
-  if (typeof request.body.fur !== "undefined" && request.body.fur !== "none") {
-    whereStatements.push(`fur = ?`);
-    queryParams.push(request.body.fur);
+  if (typeof parameters.fur !== "undefined" && parameters.fur !== "none") {
+    whereStatements.push(`ft.id = ?`);
+    queryParams.push(parameters.fur);
   }
   if (
-    typeof request.body.color !== "undefined" &&
-    request.body.color.length > 0
+    typeof parameters.color !== "undefined" &&
+    parameters.color.length > 0
   ) {
-    whereStatements.push(`color LIKE ?`);
-    queryParams.push("%" + request.body.color + "%");
+    whereStatements.push(`db.color LIKE ?`);
+    queryParams.push("%" + parameters.color + "%");
   }
   if (
-    typeof request.body.energy !== "undefined" &&
-    request.body.energy !== "none"
+    typeof parameters.energy !== "undefined" &&
+    parameters.energy !== "none"
   ) {
-    whereStatements.push(`energy = ?`);
-    queryParams.push(request.body.energy);
+    whereStatements.push(`db.energy = ?`);
+    queryParams.push(parameters.energy);
   }
   if (
-    typeof request.body.size !== "undefined" &&
-    request.body.size.length > 0
+    typeof parameters.size !== "undefined" &&
+    parameters.size.length > 0
   ) {
     whereStatements.push(`size = ?`);
-    queryParams.push(request.body.size);
+    queryParams.push(parameters.size);
   }
 
   // Dynamically add WHERE expressions to SELECT statements if needed
@@ -81,42 +77,45 @@ async function getAll(parameters = {}) {
   }
 
   if (
-    typeof request.body.limit !== "undefined" &&
-    request.body.limit > 0 &&
-    request.body.limit <= 100 // Ensure limit is within a reasonable range
+    typeof parameters.limit !== "undefined" &&
+    parameters.limit > 0 &&
+    parameters.limit <= 100 // Ensure limit is within a reasonable range
   ) {
     selectSql += " LIMIT ?";
-    queryParams.push(parseInt(request.body.limit)); // Push the limit value to queryParams
+    queryParams.push(parseInt(parameters.limit)); // Push the limit value to queryParams
   }
 
+  console.log(parameters);
+  console.log(queryParams);
+
   console.log(selectSql);
-  return await connection.query(insertSql, queryParams);
+  return await connection.query(selectSql, queryParams);
 }
 
 
 
 async function insert(parameters = {}) {
 
-  let insertSql = 'INSERT INTO dog_breeds (name, breed, fur, color, energy, size) VALUES (?, ?, ?, ?, ?, ?) ';
+  let insertSql = 'INSERT INTO dog_breeds (name, breed, fur_type_id, color, energy, size) VALUES (?, ?, ?, ?, ?, ?) ';
   let queryParams = [];
 
   if (typeof parameters.name !== 'undefined') {
-    queryParameters.push(parameters.name);
+    queryParams.push(parameters.name);
   }
   if (typeof parameters.breed !== 'undefined') {
-    queryParameters.push(parameters.breed);
+    queryParams.push(parameters.breed);
   }
   if (typeof parameters.fur !== 'undefined') {
-    queryParameters.push(parameters.fur);
+    queryParams.push(parameters.fur);
   }
   if (typeof parameters.color !== 'undefined') {
-    queryParameters.push(parameters.color);
+    queryParams.push(parameters.color);
   }
   if (typeof parameters.energy !== 'undefined') {
-    queryParameters.push(parameters.energy);
+    queryParams.push(parameters.energy);
   }
   if (typeof parameters.size !== 'undefined') {
-    queryParameters.push(parameters.size);
+    queryParams.push(parameters.size);
   }
 
   return await connection.query(insertSql, queryParams);
@@ -125,26 +124,26 @@ async function insert(parameters = {}) {
 
 
 async function edit(parameters = {}) {
-  let updateSql = 'UPDATE dog_breeds SET name = ?, breed = ?, fur = ?, color = ?, energy = ?, size = ?  WHERE  id = ?';
+  let updateSql = 'UPDATE dog_breeds SET name = ?, breed = ?, fur_type_id = ?, color = ?, energy = ?, size = ?  WHERE  id = ?';
   let queryParams = [];
 
   if (typeof parameters.name !== 'undefined') {
-    queryParameters.push(parameters.name);
+    queryParams.push(parameters.name);
   }
   if (typeof parameters.breed !== 'undefined') {
-    queryParameters.push(parameters.breed);
+    queryParams.push(parameters.breed);
   }
   if (typeof parameters.fur !== 'undefined') {
-    queryParameters.push(parameters.fur);
+    queryParams.push(parameters.fur);
   }
   if (typeof parameters.color !== 'undefined') {
-    queryParameters.push(parameters.color);
+    queryParams.push(parameters.color);
   }
   if (typeof parameters.energy !== 'undefined') {
-    queryParameters.push(parameters.energy);
+    queryParams.push(parameters.energy);
   }
   if (typeof parameters.size !== 'undefined') {
-    queryParameters.push(parameters.size);
+    queryParams.push(parameters.size);
   }
 
   queryParams.push(parameters.dogId);
@@ -152,7 +151,7 @@ async function edit(parameters = {}) {
   console.log(queryParams);
   console.log(updateSql);
 
-  return await connection.query(updateSqlSql, queryParams);
+  return await connection.query(updateSql, queryParams);
 
 }
 

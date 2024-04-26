@@ -21,7 +21,7 @@ app.get('/dogs/', upload.none(), async (request, response) => {
   //SELECT statement variables
   
   try{
-      let result = await dogs.getAll(request.query);
+    let result = await dogs.getAll( request.query);
       console.log({ data: result });
       return response
           .status(200)
@@ -50,14 +50,14 @@ check("name", "You gotta have a name for your puppo.").isLength({ min: 3 }),
   //fur validation
   check("fur", "Describe your doggos fur.").isIn([
     "''", //empty string to prevent default value
-    "smooth",
-    "rough",
-    "cord",
-    "doub",
-    "silk",
-    "curl",
-    "wire",
-    "hless",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
   ]),
   //color validation
   check("color", "Give your puppy some color!").isLength({ min: 3 }),
@@ -89,7 +89,7 @@ check("name", "You gotta have a name for your puppo.").isLength({ min: 3 }),
         await dogs.insert(request.body);
         return response
             .status(200)
-            .json({ message: 'New weapon created!' });
+            .json({ message: 'Puppy Added!' });
     } catch (error) {
         console.log(error);
         return response
@@ -146,14 +146,14 @@ app.get('/dogs/:dogId', upload.none(),
   //fur validation
   check("fur", "Describe your doggos fur.").isIn([
     "''", //empty string to prevent default value
-    "smooth",
-    "rough",
-    "cord",
-    "doub",
-    "silk",
-    "curl",
-    "wire",
-    "hless",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
   ]),
   //color validation
   check("color", "Give your puppy some color!").isLength({ min: 3 }),
@@ -213,10 +213,10 @@ app.delete('/dogs/:dogId', async (request, response) => {
             });
     }
     try{
-        await dogs.deleteById(request.params.weaponID);
+        await dogs.deleteById(request.params.dogId);
         return response
             .status(200)
-            .json({ message: 'Puppy Added!' });
+            .json({ message: 'Puppy Deleted!' });
     } catch (error) {
         console.log(error);
         return response
